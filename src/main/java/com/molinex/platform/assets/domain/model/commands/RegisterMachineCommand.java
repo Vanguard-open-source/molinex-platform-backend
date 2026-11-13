@@ -1,0 +1,23 @@
+package com.molinex.platform.assets.domain.model.commands;
+
+import java.time.Instant;
+import java.math.BigDecimal;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import com.molinex.platform.assets.domain.model.valueobjects.MachineStatus;
+
+
+
+
+public record RegisterMachineCommand(
+        String code,
+        String name,
+        String model,
+        MachineStatus status,
+        Instant statusChangedAt
+) {
+}
