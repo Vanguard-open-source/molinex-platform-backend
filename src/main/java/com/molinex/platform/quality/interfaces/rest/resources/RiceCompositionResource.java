@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public record RiceCompositionResource(
-        Integer batchId,
+        Long batchId,
         boolean available,
         String reason,
         List<QualityAssessmentResource> assessments

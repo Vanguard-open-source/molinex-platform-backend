@@ -8,7 +8,7 @@ import java.time.Instant;
 
 public record RecordProductionWasteResource(
         @NotNull
-        Integer productionRecordId,
+        Long productionRecordId,
         @NotNull
         BigDecimal quantityValue,
         @NotNull

@@ -5,22 +5,24 @@ import com.molinex.platform.production.interfaces.acl.ProductionRecordSnapshot;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import com.molinex.platform.quality.domain.model.valueobjects.ProductionRecordId;
 
 @Service
 @RequiredArgsConstructor
 public class ExternalProductionService {
     private final ProductionContextFacade facade;
 
-    public boolean recordExists(Integer id) {
-        return facade.findRecord(id).isPresent();
+    public boolean recordExists(ProductionRecordId id) {
+        return facade.findRecord(id.value()).isPresent();
     }
 
-    public boolean batchExists(Integer id) {
+    public boolean batchExists(Long id) {
         return facade.batchExists(id);
     }
 
-    public List<Integer> recordIds(Integer batchId) {
-        return facade.findRecords(batchId).stream().map(ProductionRecordSnapshot::id).toList();
+    public Set<ProductionRecordId> recordIds(Long batchId) {
+        return facade.findRecords(batchId).stream().map(ProductionRecordSnapshot::id).map(ProductionRecordId::new).collect(Collectors.toUnmodifiableSet());
     }
 }

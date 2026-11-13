@@ -33,11 +33,9 @@ public final class ResponseEntityAssembler {
             Function<T, R> successResourceAssembler,
             HttpStatusCode successStatus
     ) {
-        return switch (result) {
-            case Result.Success<T, ApplicationError> success ->
-                    new ResponseEntity<>(successResourceAssembler.apply(success.value()), successStatus);
-            case Result.Failure<T, ApplicationError> failure ->
-                    com.molinex.platform.shared.interfaces.rest.transform.ProblemDetailFromApplicationErrorAssembler.toResponseFromApplicationError(failure.error());
-        };
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(successResourceAssembler.apply(result.value()), successStatus);
+        }
+        return ProblemDetailFromApplicationErrorAssembler.toResponseFromApplicationError(result.error());
     }
 }

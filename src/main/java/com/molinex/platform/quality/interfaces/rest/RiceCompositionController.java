@@ -29,7 +29,7 @@ public class RiceCompositionController {
             content = @Content(schema = @Schema(implementation = RiceCompositionResource.class)))
     public ResponseEntity<?> get(
             @RequestParam
-            Integer batchId) {
+            Long batchId) {
         return ResponseEntityAssembler.toResponseEntityFromResult(queries.handle(new GetRiceCompositionQuery(batchId)),
                 values -> new RiceCompositionResource(batchId, !values.isEmpty(),
                         values.isEmpty() ? "No quality results for this batch" : null,

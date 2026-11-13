@@ -7,7 +7,7 @@ import java.util.List;
 public record IndicatorSetResource(
         Instant from,
         Instant to,
-        Integer productionRecordId,
+        Long productionRecordId,
         List<IndicatorResource> indicators
 ) {
 }

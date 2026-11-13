@@ -13,4 +13,16 @@ public record Weight(BigDecimal value, MeasurementUnit unit) {
             throw new IllegalArgumentException("Weight exceeds decimal(18,4) precision");
         }
     }
+
+    public boolean isPositive() {
+        return value.signum() > 0;
+    }
+
+    public boolean isNonNegative() {
+        return value.signum() >= 0;
+    }
+
+    public BigDecimal inKilograms() {
+        return unit == MeasurementUnit.METRIC_TON ? value.movePointRight(3) : value;
+    }
 }

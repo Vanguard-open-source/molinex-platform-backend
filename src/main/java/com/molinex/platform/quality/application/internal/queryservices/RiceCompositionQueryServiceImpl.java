@@ -4,6 +4,7 @@ import com.molinex.platform.quality.application.internal.outboundservices.acl.Ex
 import com.molinex.platform.quality.application.queryservices.RiceCompositionQueryService;
 import com.molinex.platform.quality.domain.model.aggregates.QualityAssessment;
 import com.molinex.platform.quality.domain.model.queries.GetRiceCompositionQuery;
+import com.molinex.platform.quality.domain.model.valueobjects.QualityIndicator;
 import com.molinex.platform.quality.domain.repositories.QualityAssessmentRepository;
 import com.molinex.platform.shared.application.result.ApplicationError;
 import com.molinex.platform.shared.application.result.Result;
@@ -26,7 +27,10 @@ public class RiceCompositionQueryServiceImpl implements RiceCompositionQueryServ
             return Result.failure(ApplicationError.notFound("ProductionBatch", query.batchId().toString()));
         var records = production.recordIds(query.batchId());
         return Result.success(
-                repository.findAll().stream().filter(a -> records.contains(a.getProductionRecordId().value()))
+                repository.findAll().stream().filter(a -> records.contains(a.getProductionRecordId()))
+                        .filter(a -> a.getMeasurements().stream().anyMatch(m ->
+                                m.indicator() == QualityIndicator.WHOLE_GRAIN_PERCENTAGE ||
+                                m.indicator() == QualityIndicator.BROKEN_GRAIN_PERCENTAGE))
                         .sorted(Comparator.comparing(QualityAssessment::getAssessedAt)).toList());
     }
 }

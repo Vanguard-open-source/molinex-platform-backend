@@ -26,9 +26,9 @@ public class WasteRecordCommandServiceImpl implements WasteRecordCommandService 
             if ((command.baseWeightValue() == null) != (command.baseWeightUnit() == null)) return Result.failure(
                     ApplicationError.validationError("baseWeight",
                             "Value and unit must both be supplied or both omitted"));
-            if (!production.recordExists(id.value()))
+            if (!production.recordExists(id))
                 return Result.failure(ApplicationError.notFound("ProductionRecord", id.value().toString()));
-            var aggregate = new WasteRecord(null, new ProductionRecordId(command.productionRecordId()),
+            var aggregate = new WasteRecord(null, id,
                     new Weight(command.quantityValue(), command.quantityUnit()),
                     command.baseWeightValue() == null ? null :
                             new Weight(command.baseWeightValue(), command.baseWeightUnit()), null,

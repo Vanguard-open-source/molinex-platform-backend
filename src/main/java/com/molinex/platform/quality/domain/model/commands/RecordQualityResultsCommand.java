@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public record RecordQualityResultsCommand(
-        Integer productionRecordId,
+        Long productionRecordId,
         List<QualityMeasurement> measurements,
         Instant assessedAt
 ) {

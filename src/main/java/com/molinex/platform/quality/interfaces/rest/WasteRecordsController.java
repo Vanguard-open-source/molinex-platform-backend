@@ -67,7 +67,7 @@ public class WasteRecordsController {
             content = @Content(array = @ArraySchema(schema = @Schema(implementation = WasteRecordResource.class))))
     public ResponseEntity<List<WasteRecordResource>> getAll(
             @RequestParam(required = false)
-            Integer productionRecordId) {
+            Long productionRecordId) {
         return ResponseEntity.ok(queries.handle(new GetProductionWasteQuery(productionRecordId)).stream()
                 .map(WasteRecordResourceFromEntityAssembler::toResourceFromEntity).toList());
     }

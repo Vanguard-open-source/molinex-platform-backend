@@ -6,7 +6,7 @@ import java.util.List;
 
 public record QualityAssessmentResource(
         Integer id,
-        Integer productionRecordId,
+        Long productionRecordId,
         List<QualityMeasurementResource> measurements,
         Instant assessedAt
 ) {

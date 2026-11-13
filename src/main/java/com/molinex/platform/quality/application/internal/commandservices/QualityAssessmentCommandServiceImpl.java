@@ -22,9 +22,9 @@ public class QualityAssessmentCommandServiceImpl implements QualityAssessmentCom
     public Result<QualityAssessment, ApplicationError> handle(RecordQualityResultsCommand command) {
         try {
             var id = new ProductionRecordId(command.productionRecordId());
-            if (!production.recordExists(id.value()))
+            if (!production.recordExists(id))
                 return Result.failure(ApplicationError.notFound("ProductionRecord", id.value().toString()));
-            var aggregate = new QualityAssessment(null, new ProductionRecordId(command.productionRecordId()),
+            var aggregate = new QualityAssessment(null, id,
                     command.measurements(), command.assessedAt());
             return Result.success(repository.save(aggregate));
         } catch (IllegalArgumentException ex) {

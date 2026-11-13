@@ -8,7 +8,7 @@ import java.util.List;
 
 public record RecordQualityResultsResource(
         @NotNull
-        Integer productionRecordId,
+        Long productionRecordId,
         @NotNull
         @Valid
         List<

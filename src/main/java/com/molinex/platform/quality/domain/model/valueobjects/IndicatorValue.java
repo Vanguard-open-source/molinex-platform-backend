@@ -11,7 +11,7 @@ public record IndicatorValue(
         String reason,
         String source,
         Integer sourceId,
-        Integer productionRecordId,
+        Long productionRecordId,
         Instant observedAt
 ) {
 }

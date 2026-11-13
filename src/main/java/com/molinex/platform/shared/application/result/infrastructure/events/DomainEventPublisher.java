@@ -1,3 +1,5 @@
+package com.molinex.platform.shared.infrastructure.events;
+
 import com.molinex.platform.shared.domain.model.aggregates.AbstractDomainAggregateRoot;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

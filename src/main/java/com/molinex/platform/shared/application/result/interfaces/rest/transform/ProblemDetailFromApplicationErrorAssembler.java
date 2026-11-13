@@ -42,9 +42,6 @@ public final class ProblemDetailFromApplicationErrorAssembler {
         problemDetail.setTitle(toProblemTitle(error.code(), status));
         problemDetail.setProperty("code", error.code());
 
-        if (error.details() != null && !error.details().isBlank()) {
-            problemDetail.setProperty("details", error.details());
-        }
 
         return problemDetail;
     }
@@ -84,7 +81,7 @@ public final class ProblemDetailFromApplicationErrorAssembler {
 
     private static String toLocalizedMessageFromApplicationError(ApplicationError error) {
         String specificKey = toSpecificMessageKeyFromErrorCode(error.code());
-        String specificMessage = toLocalizedMessageOrNull(specificKey, error.details(),
+        String specificMessage = toLocalizedMessageOrNull(specificKey, error.message(),
                 toEntityNameFromErrorCode(error.code()));
         if (specificMessage != null) {
             return specificMessage;
@@ -94,7 +91,7 @@ public final class ProblemDetailFromApplicationErrorAssembler {
         return toLocalizedMessageWithFallback(
                 fallbackKey,
                 error.message(),
-                error.details(),
+                error.message(),
                 toEntityNameFromErrorCode(error.code())
         );
     }

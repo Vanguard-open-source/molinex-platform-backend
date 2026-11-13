@@ -5,12 +5,12 @@ import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 @Converter
-public class ProductionRecordIdPersistenceConverter implements AttributeConverter<ProductionRecordId, Integer> {
-    public Integer convertToDatabaseColumn(ProductionRecordId value) {
+public class ProductionRecordIdPersistenceConverter implements AttributeConverter<ProductionRecordId, Long> {
+    public Long convertToDatabaseColumn(ProductionRecordId value) {
         return value == null ? null : value.value();
     }
 
-    public ProductionRecordId convertToEntityAttribute(Integer value) {
+    public ProductionRecordId convertToEntityAttribute(Long value) {
         return value == null ? null : new ProductionRecordId(value);
     }
 }

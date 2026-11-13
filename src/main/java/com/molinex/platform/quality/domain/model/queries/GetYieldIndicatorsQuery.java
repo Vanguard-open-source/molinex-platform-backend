@@ -6,6 +6,6 @@ import java.time.Instant;
 public record GetYieldIndicatorsQuery(
         Instant from,
         Instant to,
-        Integer productionRecordId
+        Long productionRecordId
 ) {
 }

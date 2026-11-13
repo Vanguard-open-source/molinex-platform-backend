@@ -8,7 +8,7 @@ import java.time.Instant;
 
 public record WasteRecordResource(
         Integer id,
-        Integer productionRecordId,
+        Long productionRecordId,
         BigDecimal quantityValue,
         MeasurementUnit quantityUnit,
         BigDecimal baseWeightValue,

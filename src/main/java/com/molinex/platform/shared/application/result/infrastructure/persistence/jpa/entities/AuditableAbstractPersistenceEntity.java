@@ -1,12 +1,10 @@
 package com.molinex.platform.shared.infrastructure.persistence.jpa.entities;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.EntityListeners;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
 
@@ -15,12 +13,20 @@ import java.time.Instant;
  */
 @Getter
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 public abstract class AuditableAbstractPersistenceEntity {
-    @CreatedDate
     @Column(nullable = false, updatable = false)
     private Instant createdAt;
-    @LastModifiedDate
     @Column(nullable = false)
     private Instant updatedAt;
+
+    @PrePersist
+    private void initializeAuditDates() {
+        createdAt = Instant.now();
+        updatedAt = createdAt;
+    }
+
+    @PreUpdate
+    private void updateAuditDate() {
+        updatedAt = Instant.now();
+    }
 }

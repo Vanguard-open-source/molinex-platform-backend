@@ -7,7 +7,7 @@ import java.time.Instant;
 
 
 public record RecordProductionWasteCommand(
-        Integer productionRecordId,
+        Long productionRecordId,
         BigDecimal quantityValue,
         MeasurementUnit quantityUnit,
         BigDecimal baseWeightValue,

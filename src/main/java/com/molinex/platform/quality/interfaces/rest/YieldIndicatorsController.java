@@ -27,7 +27,7 @@ public class YieldIndicatorsController {
             @RequestParam(required = false)
             Instant to,
             @RequestParam(required = false)
-            Integer productionRecordId) {
+            Long productionRecordId) {
         return new IndicatorSetResource(from, to, productionRecordId,
                 queries.handle(new GetYieldIndicatorsQuery(from, to, productionRecordId)).stream()
                         .map(IndicatorResourceFromValueAssembler::toResourceFromValue).toList());
