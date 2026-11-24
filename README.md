@@ -10,3 +10,7 @@ Para iniciar la aplicación ejecuta `./mvnw spring-boot:run` o
 El código de los bounded contexts se incorporará mediante ramas feature
 creadas desde develop. Cada contexto organizará sus responsabilidades en
 interfaces, application, domain e infrastructure.
+
+
+link del despliegue 
+https://molinex-platform-backend-vanguard.azurewebsites.net/swagger-ui/index.html
